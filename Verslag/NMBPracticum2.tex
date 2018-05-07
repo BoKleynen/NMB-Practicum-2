@@ -1,0 +1,133 @@
+\documentclass[a4paper]{article}
+
+% Packages
+\usepackage[left=25mm, top=30mm,]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{physics}
+\usepackage[dutch]{babel}
+\usepackage{fixltx2e}
+
+\renewcommand{\lstlistingname}{Algoritme}
+\renewcommand{\lstlistlistingname}{Lijst van algoritmen}
+
+\lstset{
+	language=Matlab,
+	captionpos=b,
+	frame=single,
+	numbers=left,
+	numberstyle=\tiny\color{{rgb}{0.5,0.5,0.5}},
+	showstringspaces=false,
+}
+
+\usepackage{hyperref}
+\hypersetup{pdfborder={0 0 0}}
+
+% Commands and stuff
+\newcommand{\opgave}[1]{\subsection{Opgave #1}}
+
+% Title Page stuff
+\title{Practicum Numerieke Modelering en Benadering}
+\author{Wim Kunnen, r0629332 \\ Bo Kleynen, r0624034}
+\date{7 mei 2018}
+
+% Actual document
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+
+
+% Table of Contents
+\pagenumbering{roman}
+\setcounter{page}{1}
+\tableofcontents
+\cleardoublepage
+
+% List of figures
+\listoffigures
+\addcontentsline{toc}{section}{\numberline{} Lijst van tiguren}
+
+% List of Tables
+\listoftables
+\addcontentsline{toc}{section}{\numberline{} Lijst van tabellen}
+
+\lstlistoflistings
+\addcontentsline{toc}{section}{\numberline{} Lijst van algoritmen}
+
+\cleardoublepage
+
+
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% PDE stuff
+\section{Theoretische eigenschappen}\label{sec:theorie}
+
+\opgave{1: Gelijktijdige iteratie}\label{sec:oef1}
+
+\opgave{2: Rayleigh iteratie}\label{sec:oef2}
+
+\opgave{3: Methode van Arnoldi}\label{sec:oef3}
+
+\section{Het QR-algoritme}\label{sec:QR}
+
+\opgave{4: Hessenberg}\label{sec:oef4}
+
+De Hessenbergvorm van een matrix is een matrix waarvoor alle elementen onder de eerste benedendiagonaal gelijk zijn aan nul.
+\begin{equation}\nonumber
+	h_{ij} =0 , \text{voor alle } i > j+1
+\end{equation}
+
+We zien inderdaad deze vorm. Ook staan er nullen waar ze niet moeten staan, maar de definitie meldt niets over het niet nul zijn van deze elementen. Veel algoritmen hebben beduidend minder rekenkracht nodig wanneer deze toegepast worden op diagonale matrices. Deze eigenschap komt ook vaak voor wanneer de berekeningen uitgevoerd worden op een Hessenbergmatrix.
+\opgave{5: Implementatie QR-algoritmen}\label{sec:oef5}
+
+\opgave{6: Vergelijking}\label{sec:oef6}
+
+De methode van de gelijktijdige iteratie zal alle mogelijke eigenwaarden vinden, terwijl het 	 QR-algoritme en de Rayleigh quoti\"ent iteratie er maar 1 vinden. \par\noindent 
+    Het QR-algoritme met Rayleighshift lijkt op de Rayleigh quoti\"ent iteratie, omdat we door 		toepassing van het Rayleigh quoti\"ent dezelfde eigenwaarde en eigenvector benadering krijgen 	  na de shift als bij de Rayleigh quoti\"ent iteratie. Hierdoor heeft het QR-algoritme dus net 		zoals de Rayleigh quoti\"ent iteratie een kwadratische convergentie. \par\noindent
+    De gelijkenis tussen het QR algoritme en de gelijktijdige iteratie, is dat het QR-algoritme 	eigenlijk het gelijktijdige iteratie algoritme is, maar dan toegepast op de identiteitsmatrix. 	   Doordat we nu met vierkant matrices werken, kunnen we dan ook het volledige QR-factorisatie 		toepassen.
+    \\ \par\noindent
+    De convergentie van het QR-algoritme met Rayleighshift is een combinatie van de convergentie 	 van Rayleigh iteratie en gelijktijdige iteratie, in het opzicht dat zowel het QR-algoritme als 	de Rayleigh iteratie kwadratisch convergeren, terwijl gelijktijdige iteratie slechts lineair 	 convergeert. In Figuur 2 is de eerste iteratie al zeer nauwkeurig, waardoor dit niet duidelijk 	zichtbaar is. Het QR-algoritme is net zoals bij gelijktijdige iteratie minder afhankelijk van 	  de initi\"ele startvector. De Rayleigh quoti\"ent iteratie zal convergeren naar de 				dichtstbijzijnde eigenwaarde en eigenvector. Indien er dus geen eigenwaarde in de buurt ligt, 	  zal de convergentie traag verlopen. QR is dus een goede combinatie van de twee, voor het geval 	 er slecht \'e\'en eigenwaarde gekend moet zijn, omdat er altijd convergentie optreedt en deze 		relatief snel verloopt.
+
+\section{Alternatieve eigenwaardenalgoritmen}\label{sec:alternatief}
+
+\opgave{7: Co\"effici\"enten}\label{sec:oef7}
+
+    Het algoritme voor de Jacobi methode is te vinden in het bijgevoegde bestand jacobi.m.			\par\noindent
+    Dit algoritme voor de methode van Jacobi met rotatiematrix 
+    \[J = \begin{bmatrix}
+    	c & s \\
+    	-s & c 
+    \end{bmatrix}\] 
+    zal 0-elementen introduceren in een matrix \(A\) beginnend vanaf het eerste 					niet-diagonaalelement.
+
+\opgave{8: Implementatie Jacobi}\label{sec:oef8}
+
+\opgave{9: Convergentie}\label{sec:oef9}
+
+\section{Toegevoegde gradi\"enten}\label{sec:CG}
+
+\opgave{10: Grenzen}\label{sec:oef10}
+
+\begin{itemize}
+    	\item conditiegetal \(\kappa(A)\): \par\noindent
+        \[\frac{\norm{e_n}_A}{\norm{e_0}_A} \leq 2*(\frac{\sqrt[]{\kappa(A)}-1}{\sqrt[]					{\kappa(A)}+1})^n\]
+        Oplossen naar \(\kappa(A)\) levert
+        \[\kappa(A) \leq (\frac{-(\sqrt[n]{\frac{\norm{e_n}_A}{2*\norm{e_0}_A}}+1)}						{(\sqrt[n]{\frac{\norm{e_n}_A}{2*\norm{e_0}_A}}-1)})^2\]
+        Invullen voor \(n = 10\) met \(\norm{e_{10}}_A = 2*2^{-10}\) en \(\norm{e_0}_A = 1\) 			levert \(\kappa(A) \leq 9\).
+        
+        \item \(\norm{e_{20}}_A\): \par\noindent
+        \[\norm{e_n}_A \leq 2*\norm{e_0}_A*(\frac{\sqrt[]{\kappa(A)}-1}{\sqrt[]							{\kappa(A)}+1})^n\]
+        Invullen voor \(n = 20\) met \(\kappa(A) = 9\) levert \(\norm{e_{20}}_A \leq 					1.907*10^{-6}\).
+	\end{itemize}
+
+\opgave{11: Bewijs}\label{sec:oef11}
+
+
+\end{document}
