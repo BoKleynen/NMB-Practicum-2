@@ -99,13 +99,46 @@ De methode van de gelijktijdige iteratie zal alle mogelijke eigenwaarden vinden,
 
 \opgave{7: Co\"effici\"enten}\label{sec:oef7}
 
-    Het algoritme voor de Jacobi methode is te vinden in het bijgevoegde bestand jacobi.m.			\par\noindent
-    Dit algoritme voor de methode van Jacobi met rotatiematrix 
-    \[J = \begin{bmatrix}
-    	c & s \\
-    	-s & c 
-    \end{bmatrix}\] 
-    zal 0-elementen introduceren in een matrix \(A\) beginnend vanaf het eerste 					niet-diagonaalelement.
+Een rotatie-matrix is een orthogonale matrix met: 
+\begin{equation} \label{eq:rot-matrix}
+det(J)=1
+\end{equation}.
+We zoeken een oplossing voor: 
+\begin{equation} \label{eq:jacobi}
+J^T 
+\begin{bmatrix} a & d \\ d & b \end{bmatrix} 
+J = 
+\begin{bmatrix}\ne{0} & 0 \\ 0 & \ne{0}\end{bmatrix}
+\end{equation}
+
+met: $$J = \begin{bmatrix}
+c & s \\ -s & c
+\end{bmatrix}$$
+
+Uitwerken van \ref{eq:jacobi} levert volgende vergelijking op:
+\begin{equation}
+c^2d-bcs+acs-ds^2 = 0
+\end{equation}
+
+Samen met \ref{eq:rot-matrix} vormt dit een stelsel van 2 vergelijkingen met 2 onbekenden.
+$$\begin{cases}
+c^2d-bcs+acs-ds^2 = 0 \\ det(J) = c^2 + s^2 = 1
+\end{cases}$$
+
+We voeren volgende substitutie uit op \ref{eq:jacobi}
+\begin{equation}
+\begin{cases}
+c = cos(\theta) \\ s = sin(\theta)
+\end{cases}
+\end{equation}
+
+$$ d \cos^2(\theta) - b \cos(\theta) \sin(\theta) + a \cos(\theta) \sin(\theta) - d \sin^2(\theta) = 0$$
+$$ d \cos(2\theta) + \frac{a-b}{2}(2 \cos(\theta)\sin(\theta)) = 0 $$
+$$ d \cos(2\theta) = \frac{b-a}{2}\sin(2\theta)$$
+
+\begin{equation}
+tan(2\theta) = \frac{2d}{b-a}
+\end{equation}
 
 \opgave{8: Implementatie Jacobi}\label{sec:oef8}
 

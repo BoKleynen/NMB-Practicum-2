@@ -2,3 +2,19 @@
 *.pdf
 
 MATLAB/test\.mlx
+
+*.aux
+
+*.lof
+
+*.log
+
+*.lol
+
+*.lot
+
+*.toc
+
+*.gz
+
+*.out
