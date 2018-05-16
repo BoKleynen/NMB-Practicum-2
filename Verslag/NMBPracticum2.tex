@@ -9,9 +9,13 @@
 \usepackage{physics}
 \usepackage[dutch]{babel}
 \usepackage{fixltx2e}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
 
 \renewcommand{\lstlistingname}{Algoritme}
 \renewcommand{\lstlistlistingname}{Lijst van algoritmen}
+\newcommand*{\qed}{\hfill\ensuremath{\square}}
 
 \lstset{
 	language=Matlab,
@@ -74,6 +78,15 @@
 \opgave{2: Rayleigh iteratie}\label{sec:oef2}
 
 \opgave{3: Methode van Arnoldi}\label{sec:oef3}
+a)  \\
+\newline
+b)  Zij $\vec{v} \in K_n$. Aangezien $Q_n$ een orthogonale basis vormt voor $K_n$, is $\vec{v} = Q_n\vec{x}$ voor een $\vec{x} \in \mathbb{C^{n}}$. Nu is $A \vec{v} = AQ_n\vec{v} = Q_n(H_n\vec{x}) = Q_n\vec{y}$, met $\vec{y} = H_n\vec{x} $.  Waaruit volgt: $A\vec{v} \in K_n$. \qed\\
+\newline
+c) De $n+1^e$ basisvector van $K_{n+1}$ wordt gegeven door $ A^nb = A(A^{n-1b}) $. Uit b) volgt: $A^nb \in K_n$. Dus $K_{n+1} \subseteq K_n$ en $K_{n} \subseteq K_{n+1}$ zijn triviaal. Hieruit volgt dat: $K_n = K_{n+1}$ en via inductie, $K_n = K_{n+i}$ voor $1 \leq i \leq (m-n)$\\
+\newline
+d) Zij $\vec{v}$ een eigenvector van $H_n$ met eigenwaarde $\lambda$. Uit b) weten we $AQ_n = Q_nH_n$. Dus $A(Q_n\vec{v}) = Q_nH_n\vec{v} = \lambda(Q_n\vec{v})$. Waaruit volgt dat elke eigenwaarde van $H_n$ ook een eigenwaarde is van A.\\
+\newline
+e) $\vec{x} = A^{-1}b = A^{-1}Q_n\vec{e_1}\norm{b} = A^{-1}Q_nH_nH_n^{-1}\vec{e_1}\norm{b} = A^{-1}AQ_nH_n^{-1}\vec{e_1}\norm{b} = Q_n(H_n^{-1}\vec{e_1}\norm{b}) \in K_n$.
 
 \section{Het QR-algoritme}\label{sec:QR}
 
