@@ -12,10 +12,16 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage[noend]{algpseudocode}
+\usepackage{algorithm}
 
 \renewcommand{\lstlistingname}{Algoritme}
 \renewcommand{\lstlistlistingname}{Lijst van algoritmen}
 \newcommand*{\qed}{\hfill\ensuremath{\square}}
+
+\makeatletter
+\renewcommand{\ALG@name}{Algoritme}
+\makeatother
 
 \lstset{
 	language=Matlab,
@@ -54,13 +60,13 @@
 
 % List of figures
 \listoffigures
-\addcontentsline{toc}{section}{\numberline{} Lijst van tiguren}
+\addcontentsline{toc}{section}{\numberline{} Lijst van figuren}
 
 % List of Tables
 \listoftables
 \addcontentsline{toc}{section}{\numberline{} Lijst van tabellen}
 
-\lstlistoflistings
+\listofalgorithms
 \addcontentsline{toc}{section}{\numberline{} Lijst van algoritmen}
 
 \cleardoublepage
@@ -75,12 +81,28 @@
 
 \opgave{1: Gelijktijdige iteratie}\label{sec:oef1}
 
+Gelijktijdige iteratie geeft convergentie naar de grootste eigenwaarde. Door gelijktijdige iteratie toe te passen op de matrix $(A-\tau I)^{-1}$ worden de eigenwaarden $\frac{1}{\lambda - \tau}$ gevonden. Hierin zijn $\lambda$ de originele eigenwaarden en is de grootste eigenwaarde deze die het dichtst gelegen is bij $\tau$. Hiervoor wordt een ander algoritme gebruikt opdat men niet de inverse expliciet zou moeten bepalen, maar men een stelsel kan oplossen.
+\newline
+\begin{algorithm}
+\begin{algorithmic}[H]\label{alg:SI}\caption{Simultaneous iteration with shifts}
+	\State $M = (A-\tau I)^{-1}$
+	\State Pick $\textbf{\^{Q}}^{(0)} \in  \mathbb{R^{\text{m} \times \text{n}}}$
+	\For{$k = 1, 2, ...$}
+		\State $\textbf{Z} = \textbf{A}\textbf{\^{Q}}^{(k-1)}$
+		\State$\textbf{\^{Q}}^{(k)}\textbf{\^{R}}^{(k)} = \textbf{Z}$
+	\EndFor
+\end{algorithmic}
+\end{algorithm}
+
 \opgave{2: Rayleigh iteratie}\label{sec:oef2}
+a) Wanneer $\lambda_{k-1}$ dichter komt bij de exacte eigenwaarde, zal er een een eigenwaarde van de matrix $A-\mu I$ dichter tegen nul liggen. Het stelsel wordt dus (bijna) singulier.  De overeenkomstige eigenwaarde van de ge\"inverteerde matrix $(A-\mu I)^{-1}$ zal heel groot worden, aangezien de eigenwaarden van de inverse van een matrix gelijk zijn aan de inversen van de eigenwaarden van de oorspronkelijke matrix.  We krijgen dus een grote fout op de oplossing in de richting van de overeenkomstige eigenvector. Deze eigenvector is gelijk aan de eigenvector van de overeenkomstige eigenwaarde van de niet ge\"inverteerde matrix.  De gevonden vector ligt dus al in de juiste richting (die van de te zoeken eigenvector bij de eigenwaarde), maar zal door het zeer slechte conditiegetal heel groot zijn. Na normalisatie vinden we echter een vector die de gezochte eigenvector zeer goed benadert.\\
+\newline
+b) \\
 
 \opgave{3: Methode van Arnoldi}\label{sec:oef3}
 a)  \\
 \newline
-b)  Zij $\vec{v} \in K_n$. Aangezien $Q_n$ een orthogonale basis vormt voor $K_n$, is $\vec{v} = Q_n\vec{x}$ voor een $\vec{x} \in \mathbb{C^{n}}$. Nu is $A \vec{v} = AQ_n\vec{v} = Q_n(H_n\vec{x}) = Q_n\vec{y}$, met $\vec{y} = H_n\vec{x} $.  Waaruit volgt: $A\vec{v} \in K_n$. \qed\\
+b)  Zij $\vec{v} \in K_n$. Aangezien $Q_n$ een orthogonale basis vormt voor $K_n$, is $\vec{v} = Q_n\vec{x}$ voor een $\vec{x} \in \mathbb{C^{\text{n}}}$. Nu is $A \vec{v} = AQ_n\vec{v} = Q_n(H_n\vec{x}) = Q_n\vec{y}$, met $\vec{y} = H_n\vec{x} $.  Waaruit volgt: $A\vec{v} \in K_n$. \qed\\
 \newline
 c) De $n+1^e$ basisvector van $K_{n+1}$ wordt gegeven door $ A^nb = A(A^{n-1b}) $. Uit b) volgt: $A^nb \in K_n$. Dus $K_{n+1} \subseteq K_n$ en $K_{n} \subseteq K_{n+1}$ zijn triviaal. Hieruit volgt dat: $K_n = K_{n+1}$ en via inductie, $K_n = K_{n+i}$ voor $1 \leq i \leq (m-n)$\\
 \newline
