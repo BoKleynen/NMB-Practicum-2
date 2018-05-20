@@ -97,7 +97,24 @@ Gelijktijdige iteratie geeft convergentie naar de grootste eigenwaarde. Door gel
 \opgave{2: Rayleigh iteratie}\label{sec:oef2}
 a) Wanneer $\lambda_{k-1}$ dichter komt bij de exacte eigenwaarde, zal er een een eigenwaarde van de matrix $A-\mu I$ dichter tegen nul liggen. Het stelsel wordt dus (bijna) singulier.  De overeenkomstige eigenwaarde van de ge\"inverteerde matrix $(A-\mu I)^{-1}$ zal heel groot worden, aangezien de eigenwaarden van de inverse van een matrix gelijk zijn aan de inversen van de eigenwaarden van de oorspronkelijke matrix.  We krijgen dus een grote fout op de oplossing in de richting van de overeenkomstige eigenvector. Deze eigenvector is gelijk aan de eigenvector van de overeenkomstige eigenwaarde van de niet ge\"inverteerde matrix.  De gevonden vector ligt dus al in de juiste richting (die van de te zoeken eigenvector bij de eigenwaarde), maar zal door het zeer slechte conditiegetal heel groot zijn. Na normalisatie vinden we echter een vector die de gezochte eigenvector zeer goed benadert.\\
 \newline
-b) \\
+b) \\  Het zoeken naar een waarde $\rho \in \mathbb{R}$ waarvoor geldt dat:
+\begin{equation}
+\min_{\rho \in \mathbb{R}} ||Ax - \rho x||_2
+\end{equation}
+komt overeen met het zoeken van een kleinste-kwadraten benadering van:
+\begin{equation}
+x \rho \approx Ax
+\end{equation}
+waarbij $x$ een $m \cross 1$ matrix en $Ax$ het rechterlid is.
+De normaalvergelijking is:
+\begin{equation}
+x^T x \rho = x^T A x
+\end{equation}
+of anders geschreven:
+\begin{equation}
+\rho = \frac{x^T A x}{x^T x}
+\end{equation}
+hetgeen overeenkomt met het Rayleigh quoti\"ent van $x$.
 
 \opgave{3: Methode van Arnoldi}\label{sec:oef3}
 a)  \\
