@@ -137,7 +137,25 @@ De Hessenbergvorm van een matrix is een matrix waarvoor alle elementen onder de 
 \end{equation}
 
 We zien inderdaad deze vorm. Ook staan er nullen waar ze niet moeten staan, maar de definitie meldt niets over het niet nul zijn van deze elementen. Veel algoritmen hebben beduidend minder rekenkracht nodig wanneer deze toegepast worden op diagonale matrices. Deze eigenschap komt ook vaak voor wanneer de berekeningen uitgevoerd worden op een Hessenbergmatrix.
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=0.5\textwidth]{spy.eps}
+	\end{center}
+	\caption{Sparsiteit van de gegeven matrix.}
+	\label{fig:spy}
+\end{figure}
+\newpage
+
 \opgave{5: Implementatie QR-algoritmen}\label{sec:oef5}
+De algoritmen werden uitgewerkt in bijgevoegde Matlab files en de fout geplot in functie van het aantal iteratie stappen voor de gegeven matrix mat1. Zoals verwacht vertonen de algoritmen kwadratische convergentie, waarbij die met shifts sneller convergeren.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=0.7\textwidth]{opgave5.eps}
+	\end{center}
+	\caption{Convergenties QR algoritmen.}
+	\label{fig:QR}
+\end{figure}
 
 \opgave{6: Vergelijking}\label{sec:oef6}
 
@@ -146,6 +164,7 @@ De methode van de gelijktijdige iteratie zal alle mogelijke eigenwaarden vinden,
     De gelijkenis tussen het QR algoritme en de gelijktijdige iteratie, is dat het QR-algoritme 	eigenlijk het gelijktijdige iteratie algoritme is, maar dan toegepast op de identiteitsmatrix. 	   Doordat we nu met vierkant matrices werken, kunnen we dan ook het volledige QR-factorisatie 		toepassen.
     \\ \par\noindent
     De convergentie van het QR-algoritme met Rayleighshift is een combinatie van de convergentie 	 van Rayleigh iteratie en gelijktijdige iteratie, in het opzicht dat zowel het QR-algoritme als 	de Rayleigh iteratie kwadratisch convergeren, terwijl gelijktijdige iteratie slechts lineair 	 convergeert. In Figuur 2 is de eerste iteratie al zeer nauwkeurig, waardoor dit niet duidelijk 	zichtbaar is. Het QR-algoritme is net zoals bij gelijktijdige iteratie minder afhankelijk van 	  de initi\"ele startvector. De Rayleigh quoti\"ent iteratie zal convergeren naar de 				dichtstbijzijnde eigenwaarde en eigenvector. Indien er dus geen eigenwaarde in de buurt ligt, 	  zal de convergentie traag verlopen. QR is dus een goede combinatie van de twee, voor het geval 	 er slecht \'e\'en eigenwaarde gekend moet zijn, omdat er altijd convergentie optreedt en deze 		relatief snel verloopt.
+\newpage
 
 \section{Alternatieve eigenwaardenalgoritmen}\label{sec:alternatief}
 
@@ -193,6 +212,27 @@ tan(2\theta) = \frac{2d}{b-a}
 \end{equation}
 
 \opgave{8: Implementatie Jacobi}\label{sec:oef8}
+
+\begin{algorithm}
+\begin{algorithmic}[H]\label{alg:SI}\caption{Jacobi}
+\State $m = size(rows(D))$
+\While{$\norm{R_A}_F > tol$}
+\For{$i = 1:m-1$}
+\For{$j = i+1:m$}
+\State $\theta = atan(2*A(i,j)/(A(j,j) - A(i,i)))$
+\State $c = cos(\theta)$
+\State $s = sin(\theta)$
+\State $J = \begin{bmatrix}c & s \\ -s & c \end{bmatrix}$
+\State $D([i, j], :) = J' * D([i, j], :)$
+\State $D(:, [i, j]) = D(:, [i, j]) * J$
+\State $V(:, [i, j]) = V(:, [i, j]) * J$
+\EndFor
+\EndFor
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+De Matlab implementatie werd in bijlage toegevoegd.
 
 \opgave{9: Convergentie}\label{sec:oef9}
 
