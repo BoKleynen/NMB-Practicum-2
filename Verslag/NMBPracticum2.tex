@@ -186,17 +186,19 @@ met: $$J = \begin{bmatrix}
 c & s \\ -s & c
 \end{bmatrix}$$
 
-Uitwerken van \ref{eq:jacobi} levert volgende vergelijking op:
-\begin{equation}
+Uitwerken van (\ref{eq:jacobi}) levert volgende vergelijking op:
+\begin{equation} \label{eq:jacobi-vgl}
 c^2d-bcs+acs-ds^2 = 0
 \end{equation}
 
-Samen met \ref{eq:rot-matrix} vormt dit een stelsel van 2 vergelijkingen met 2 onbekenden.
-$$\begin{cases}
+Samen met (\ref{eq:rot-matrix}) vormt dit een stelsel van 2 vergelijkingen met 2 onbekenden.
+\begin{equation}
+\begin{cases}
 c^2d-bcs+acs-ds^2 = 0 \\ det(J) = c^2 + s^2 = 1
-\end{cases}$$
+\end{cases}
+\end{equation}
 
-We voeren volgende substitutie uit op \ref{eq:jacobi}
+We voeren volgende substitutie uit op (\ref{eq:jacobi-vgl})
 \begin{equation}
 \begin{cases}
 c = cos(\theta) \\ s = sin(\theta)
