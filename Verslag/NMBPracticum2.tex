@@ -217,7 +217,7 @@ tan(2\theta) = \frac{2d}{b-a}
 \While{$\norm{R_A}_F > tol$}
 \For{$i = 1:m-1$}
 \For{$j = i+1:m$}
-\State $\theta = atan(2*A(i,j)/(A(j,j) - A(i,i)))$
+\State $\theta = \frac{atan(2*A(i,j)/(A(j,j) - A(i,i)))}{2}$
 \State $c = cos(\theta)$
 \State $s = sin(\theta)$
 \State $J = \begin{bmatrix}c & s \\ -s & c \end{bmatrix}$
@@ -234,6 +234,16 @@ De Matlab implementatie werd in bijlage toegevoegd.
 
 \opgave{9: Convergentie}\label{sec:oef9}
 
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=0.7\textwidth]{Jacobi.eps}
+	\end{center}
+	\caption{Convergentie Jacobi.}
+	\label{fig:Jacobi}
+\end{figure}
+
+Het algoritme vertoont kwadratische convergentie, wat de theorie voorspelt.
+
 \section{Toegevoegde gradi\"enten}\label{sec:CG}
 
 \opgave{10: Grenzen}\label{sec:oef10}
@@ -249,7 +259,7 @@ De Matlab implementatie werd in bijlage toegevoegd.
         \[\norm{e_n}_A \leq 2*\norm{e_0}_A*(\frac{\sqrt[]{\kappa(A)}-1}{\sqrt[]							{\kappa(A)}+1})^n\]
         Invullen voor \(n = 20\) met \(\kappa(A) = 9\) levert \(\norm{e_{20}}_A \leq 					1.907*10^{-6}\).
 	\end{itemize}
-
+\newpage
 \opgave{11: Bewijs}\label{sec:oef11}
 Na j iteratie stappen wordt de Krylov deelruimte $K_j$ opgespannen door de j eigenvectoren waaruit $\vec{b}$ bestaat ($K_j(A,b) = \langle b, Ab, A^2,\text{..., }A^{j-1}b \rangle $). Aan de hand van optimaliteitseigenschap (p299, Tefethen) kunnen we een vergelijking opstellen voor de fout, namelijk: $\norm{e_0}_A^2 = \sum_{i=1}^m a_j^2 \lambda_j$. We weten echter ook dat er slechts j $a_i$'s van nul verschillen. Aangezien er reeds j stappen uitgevoerd zijn, is er een polynoom te vinden die voor alle eigenwaarden nul is (= de karakteristieke veelterm). De fout is hiervoor nul en zal de oplossing exact zijn.
 
