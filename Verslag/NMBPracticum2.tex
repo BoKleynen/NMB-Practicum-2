@@ -169,7 +169,7 @@ De methode van de gelijktijdige iteratie zal alle mogelijke eigenwaarden vinden,
 Een rotatie-matrix is een orthogonale matrix met: 
 \begin{equation} \label{eq:rot-matrix}
 det(J)=1
-\end{equation}.
+\end{equation}
 We zoeken een oplossing voor: 
 \begin{equation} \label{eq:jacobi}
 J^T 
@@ -217,13 +217,13 @@ tan(2\theta) = \frac{2d}{b-a}
 \While{$\norm{R_A}_F > tol$}
 \For{$i = 1:m-1$}
 \For{$j = i+1:m$}
-\State $\theta = \frac{atan(2*A(i,j)/(A(j,j) - A(i,i)))}{2}$
+\State $\theta = \frac{1}{2} \atan(2 \frac{a_{i,j}}{a_{j,j} - a_{i,i}})$
 \State $c = cos(\theta)$
 \State $s = sin(\theta)$
 \State $J = \begin{bmatrix}c & s \\ -s & c \end{bmatrix}$
-\State $D([i, j], :) = J' * D([i, j], :)$
-\State $D(:, [i, j]) = D(:, [i, j]) * J$
-\State $V(:, [i, j]) = V(:, [i, j]) * J$
+\State $D_{i:j, :} = J' D_{i:j, :}$
+\State $D_{:, i:j} = D_{:, i:j}  J$
+\State $V_{:, i:j} = V_{:, i:j}  J$
 \EndFor
 \EndFor
 \EndWhile
